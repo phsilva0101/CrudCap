@@ -18,7 +18,9 @@ namespace CrudCap.WebApi.IoC
         public static void AddDatabaseContext(this IServiceCollection services, AppSettings settings)
         {
             if (settings.ConnectionStrings.SQL != null)
-                services.AddDbContext<CrudCapContext>(options => options.UseSqlServer(settings.ConnectionStrings.SQL));
+                services.AddDbContext<CrudCapContext>(options =>
+                options.UseSqlServer(settings.ConnectionStrings.SQL)
+                .EnableSensitiveDataLogging());
             else if (settings.ConnectionStrings.MySQL != null)
                 services.AddDbContext<CrudCapContext>(options => options.UseMySql(settings.ConnectionStrings.MySQL, MySqlServerVersion.AutoDetect(settings.ConnectionStrings.MySQL)));
             else if (settings.ConnectionStrings.PostgreSQL != null)

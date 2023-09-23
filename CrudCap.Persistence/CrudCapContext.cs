@@ -3,6 +3,7 @@ using CrudCap.Domain.Entities.Location;
 using CrudCap.Domain.Entities.Propertie;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.Extensions.Logging;
 
 namespace CrudCap.Persistence
 {
@@ -19,6 +20,12 @@ namespace CrudCap.Persistence
         public DbSet<State> States { get; set; }
         public DbSet<Properties> Properties { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            _ = optionsBuilder.UseLoggerFactory(new LoggerFactory(new[] {
+        new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider()
+    }));
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
