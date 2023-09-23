@@ -56,17 +56,18 @@ namespace CrudCap.Domain.ViewModels.Propertie
                 {
                     Id = properties.City.Id,
                     Name = properties.City.Name,
-                    Country = properties.City.State.Country == null ? null : new CountryModel
-                    {
-                        Name = properties.City.State.Country.Name,
-                        Initials = properties.City.State.Country.Initials,
-                        Id = properties.City.State.Country.Id
-                    },
+
                     State = properties.City.State == null ? null : new StateModel
                     {
                         Name = properties.City.State.Name,
                         Initials = properties.City.State.Initials,
-                        Id = properties.City.State.Id
+                        Id = properties.City.State.Id,
+                        Country = properties.City.State.Country == null ? null : new CountryModel
+                        {
+                            Name = properties.City.State.Country.Name,
+                            Initials = properties.City.State.Country.Initials,
+                            Id = properties.City.State.Country.Id,
+                        },
                     },
                 },
 

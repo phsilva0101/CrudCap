@@ -7,7 +7,6 @@ namespace CrudCap.Domain.ViewModels.Propertie
         public string Description { get; set; }
         public decimal Value { get; set; }
         public PropertyType PropertyType { get; set; }
-        public string Number { get; set; }
         public int Rooms { get; set; }
         public int Suites { get; set; }
         public bool HasGarage { get; set; }
@@ -17,6 +16,7 @@ namespace CrudCap.Domain.ViewModels.Propertie
         public bool IsParticular { get; set; }
         public string Street { get; set; }
         public string Neighborhood { get; set; }
+        public string Number { get; set; }
         public string Complement { get; set; }
         public string ZipCode { get; set; }
 
