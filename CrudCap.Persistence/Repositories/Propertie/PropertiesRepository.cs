@@ -13,12 +13,11 @@ namespace CrudCap.Persistence.Repositories.Propertie
         {
         }
 
-        public Task<(IEnumerable<Properties> models, long count)> GetAllPropertiesAsync(PropertiesRequestFilterModel request, CancellationToken cancellationToken)
+        public async Task<(IEnumerable<Properties> models, long count)> GetAllPropertiesAsync(PropertiesRequestFilterModel request, CancellationToken cancellationToken)
         {
             var query = _context.Properties
                  .Include(x => x.RealEstate)
-                 .Include(x => x.City).ThenInclude(x => x.State)
-                 .Include(x => x.City).ThenInclude(x => x.Country)
+                 .Include(x => x.City).ThenInclude(x => x.State).ThenInclude(x => x.Country)
                  .AsQueryable();
 
             if (request.RealEstateId.HasValue)
@@ -38,7 +37,7 @@ namespace CrudCap.Persistence.Repositories.Propertie
 
             if (request.CountryId.HasValue)
             {
-                query = query.Where(x => x.City.CountryId == request.CountryId.Value);
+                query = query.Where(x => x.City.State.CountryId == request.CountryId.Value);
             }
 
             if (request.IsParticular.HasValue)
@@ -62,9 +61,9 @@ namespace CrudCap.Persistence.Repositories.Propertie
                 query = query.OrderByDescending(x => x.CreatedAt);
 
 
-            var count = query.LongCountAsync(cancellationToken);
+            var count = await query.LongCountAsync(cancellationToken);
 
-            var models = query
+            var models = await query
                 .Skip(request.Skip)
                 .Take(request.PageSize)
                 .ToListAsync(cancellationToken);

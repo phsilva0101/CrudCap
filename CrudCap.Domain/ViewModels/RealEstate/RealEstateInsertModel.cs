@@ -1,9 +1,6 @@
-﻿using CrudCap.Domain.Entities.Location;
-using CrudCap.Domain.Entities.Propertie;
-
-namespace CrudCap.Domain.Entities
+﻿namespace CrudCap.Domain.ViewModels.RealEstate
 {
-    public class RealEstate : BaseEntity
+    public class RealEstateInsertModel
     {
         public string Name { get; set; }
         public string Cnpj { get; set; }
@@ -11,7 +8,6 @@ namespace CrudCap.Domain.Entities
 
         public string Logo { get; set; }
 
-        #region Address
         public string Street { get; set; }
         public string Neighborhood { get; set; }
         public string Complement { get; set; }
@@ -21,13 +17,5 @@ namespace CrudCap.Domain.Entities
         public string Email { get; set; }
 
         public Guid CityId { get; set; }
-        public virtual City City { get; set; }
-
-        public virtual ICollection<Properties> Properties { get; set; }
-
-        public RealEstate()
-        {
-            Properties = new HashSet<Properties>();
-        }
     }
 }
