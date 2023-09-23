@@ -12,9 +12,9 @@ builder.Services.AddSingleton(appSettings);
 
 builder.Services.AddControllers(filter =>
 {
-    filter.Filters.Add<DomainValidationFilter>();
     filter.Filters.Add<GlobalExceptionsFilter>();
     filter.Filters.Add<ModelStateValidateFilter>();
+    filter.Filters.Add<DomainValidationFilter>();
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -22,6 +22,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDatabaseContext(appSettings);
+builder.Services.AddRepositories();
+builder.Services.AddServices();
 
 builder.Services.AddCors(o => o.AddPolicy("AnyOriginPolicy", builder =>
 {
