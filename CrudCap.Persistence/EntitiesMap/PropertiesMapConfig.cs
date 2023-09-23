@@ -41,14 +41,6 @@ namespace CrudCap.Persistence.EntitiesMap
                 .HasForeignKey(p => p.CityId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(p => p.State).WithMany(p => p.Properties).HasForeignKey(p => p.StateId).OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasOne(p => p.Country)
-                .WithMany(p => p.Properties)
-                .HasForeignKey(p => p.CountryId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-
         }
     }
 }

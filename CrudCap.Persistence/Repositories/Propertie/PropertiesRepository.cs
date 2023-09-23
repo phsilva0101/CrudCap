@@ -75,8 +75,7 @@ namespace CrudCap.Persistence.Repositories.Propertie
         {
             return await _context.Properties
                 .Include(x => x.RealEstate)
-                .Include(x => x.City).ThenInclude(x => x.State)
-                .Include(x => x.City).ThenInclude(x => x.Country)
+                .Include(x => x.City).ThenInclude(x => x.State).ThenInclude(x => x.Country)
                 .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
     }

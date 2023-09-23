@@ -13,6 +13,7 @@ namespace CrudCap.Domain.Entities.Location
         public virtual ICollection<RealEstate> RealEstate { get; set; }
 
 
+
         public State()
         {
             Cities = new HashSet<City>();

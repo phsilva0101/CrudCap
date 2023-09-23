@@ -22,66 +22,6 @@ namespace CrudCap.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CrudCap.Domain.Entities.Location.Address", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("AddressId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Complement")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<Guid>("CountryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeactivationAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("LastUpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Neighborhood")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<Guid>("StateId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("ZipCode")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
-
-                    b.HasIndex("CityId");
-
-                    b.HasIndex("CountryId");
-
-                    b.HasIndex("StateId");
-
-                    b.ToTable("Address", (string)null);
-                });
-
             modelBuilder.Entity("CrudCap.Domain.Entities.Location.City", b =>
                 {
                     b.Property<Guid>("Id")
@@ -118,6 +58,9 @@ namespace CrudCap.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CityId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -139,6 +82,8 @@ namespace CrudCap.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CityId");
+
                     b.ToTable("Country", (string)null);
                 });
 
@@ -146,6 +91,9 @@ namespace CrudCap.Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CountryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
@@ -169,6 +117,8 @@ namespace CrudCap.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CountryId");
+
                     b.ToTable("State", (string)null);
                 });
 
@@ -178,11 +128,19 @@ namespace CrudCap.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AddressId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("AreaM2")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("CityId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Complement")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<Guid?>("CountryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -210,13 +168,18 @@ namespace CrudCap.Persistence.Migrations
                     b.Property<DateTime>("LastUpdatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Neighborhood")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
                     b.Property<string>("Number")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<Guid>("PropertyTypeId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("PropertyType")
+                        .HasColumnType("int");
 
                     b.Property<Guid?>("RealEstateId")
                         .IsRequired()
@@ -225,6 +188,14 @@ namespace CrudCap.Persistence.Migrations
                     b.Property<int>("Rooms")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("StateId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
                     b.Property<int>("Suites")
                         .HasColumnType("int");
 
@@ -232,40 +203,22 @@ namespace CrudCap.Persistence.Migrations
                         .HasPrecision(12, 2)
                         .HasColumnType("decimal(12,2)");
 
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("CityId");
 
-                    b.HasIndex("PropertyTypeId");
+                    b.HasIndex("CountryId");
 
                     b.HasIndex("RealEstateId");
 
+                    b.HasIndex("StateId");
+
                     b.ToTable("Properties", (string)null);
-                });
-
-            modelBuilder.Entity("CrudCap.Domain.Entities.PropertyType", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeactivationAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime>("LastUpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PropertyType", (string)null);
                 });
 
             modelBuilder.Entity("CrudCap.Domain.Entities.RealEstate", b =>
@@ -274,13 +227,21 @@ namespace CrudCap.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AddressId")
+                    b.Property<Guid>("CityId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Cnpj")
                         .IsRequired()
                         .HasMaxLength(16)
                         .HasColumnType("nvarchar(16)");
+
+                    b.Property<string>("Complement")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<Guid?>("CountryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -306,6 +267,11 @@ namespace CrudCap.Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("Neighborhood")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(11)
@@ -316,42 +282,27 @@ namespace CrudCap.Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<Guid?>("StateId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("StateId");
 
                     b.ToTable("RealEstate", (string)null);
-                });
-
-            modelBuilder.Entity("CrudCap.Domain.Entities.Location.Address", b =>
-                {
-                    b.HasOne("CrudCap.Domain.Entities.Location.Address", null)
-                        .WithMany("Addresses")
-                        .HasForeignKey("AddressId");
-
-                    b.HasOne("CrudCap.Domain.Entities.Location.City", "City")
-                        .WithMany("Addresses")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("CrudCap.Domain.Entities.Location.Country", "Country")
-                        .WithMany("Addresses")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("CrudCap.Domain.Entities.Location.State", "State")
-                        .WithMany("Addresses")
-                        .HasForeignKey("StateId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("City");
-
-                    b.Navigation("Country");
-
-                    b.Navigation("State");
                 });
 
             modelBuilder.Entity("CrudCap.Domain.Entities.Location.City", b =>
@@ -365,19 +316,35 @@ namespace CrudCap.Persistence.Migrations
                     b.Navigation("State");
                 });
 
-            modelBuilder.Entity("CrudCap.Domain.Entities.Propertie.Properties", b =>
+            modelBuilder.Entity("CrudCap.Domain.Entities.Location.Country", b =>
                 {
-                    b.HasOne("CrudCap.Domain.Entities.Location.Address", "Address")
-                        .WithMany("Properties")
-                        .HasForeignKey("AddressId")
+                    b.HasOne("CrudCap.Domain.Entities.Location.City", null)
+                        .WithMany("Countries")
+                        .HasForeignKey("CityId");
+                });
+
+            modelBuilder.Entity("CrudCap.Domain.Entities.Location.State", b =>
+                {
+                    b.HasOne("CrudCap.Domain.Entities.Location.Country", "Country")
+                        .WithMany("States")
+                        .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("CrudCap.Domain.Entities.PropertyType", "PropertyType")
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("CrudCap.Domain.Entities.Propertie.Properties", b =>
+                {
+                    b.HasOne("CrudCap.Domain.Entities.Location.City", "City")
                         .WithMany("Properties")
-                        .HasForeignKey("PropertyTypeId")
+                        .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("CrudCap.Domain.Entities.Location.Country", null)
+                        .WithMany("Properties")
+                        .HasForeignKey("CountryId");
 
                     b.HasOne("CrudCap.Domain.Entities.RealEstate", "RealEstate")
                         .WithMany("Properties")
@@ -385,53 +352,59 @@ namespace CrudCap.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Address");
+                    b.HasOne("CrudCap.Domain.Entities.Location.State", null)
+                        .WithMany("Properties")
+                        .HasForeignKey("StateId");
 
-                    b.Navigation("PropertyType");
+                    b.Navigation("City");
 
                     b.Navigation("RealEstate");
                 });
 
             modelBuilder.Entity("CrudCap.Domain.Entities.RealEstate", b =>
                 {
-                    b.HasOne("CrudCap.Domain.Entities.Location.Address", "Address")
-                        .WithMany("RealEstates")
-                        .HasForeignKey("AddressId")
+                    b.HasOne("CrudCap.Domain.Entities.Location.City", "City")
+                        .WithMany("RealEstate")
+                        .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Address");
-                });
+                    b.HasOne("CrudCap.Domain.Entities.Location.Country", null)
+                        .WithMany("RealEstate")
+                        .HasForeignKey("CountryId");
 
-            modelBuilder.Entity("CrudCap.Domain.Entities.Location.Address", b =>
-                {
-                    b.Navigation("Addresses");
+                    b.HasOne("CrudCap.Domain.Entities.Location.State", null)
+                        .WithMany("RealEstate")
+                        .HasForeignKey("StateId");
 
-                    b.Navigation("Properties");
-
-                    b.Navigation("RealEstates");
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("CrudCap.Domain.Entities.Location.City", b =>
                 {
-                    b.Navigation("Addresses");
+                    b.Navigation("Countries");
+
+                    b.Navigation("Properties");
+
+                    b.Navigation("RealEstate");
                 });
 
             modelBuilder.Entity("CrudCap.Domain.Entities.Location.Country", b =>
                 {
-                    b.Navigation("Addresses");
+                    b.Navigation("Properties");
+
+                    b.Navigation("RealEstate");
+
+                    b.Navigation("States");
                 });
 
             modelBuilder.Entity("CrudCap.Domain.Entities.Location.State", b =>
                 {
-                    b.Navigation("Addresses");
-
                     b.Navigation("Cities");
-                });
 
-            modelBuilder.Entity("CrudCap.Domain.Entities.PropertyType", b =>
-                {
                     b.Navigation("Properties");
+
+                    b.Navigation("RealEstate");
                 });
 
             modelBuilder.Entity("CrudCap.Domain.Entities.RealEstate", b =>

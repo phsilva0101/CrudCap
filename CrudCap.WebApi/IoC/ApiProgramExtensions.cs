@@ -1,9 +1,13 @@
 ﻿using CrudCap.CrossCutting.SettingsApp;
 using CrudCap.Domain.Interfaces;
+using CrudCap.Domain.Interfaces.Base;
 using CrudCap.Domain.Interfaces.Propertie;
 using CrudCap.Persistence;
+using CrudCap.Persistence.Repositories.Base;
 using CrudCap.Persistence.Repositories.Propertie;
+using CrudCap.Services.Interfaces;
 using CrudCap.Services.Interfaces.Propertie;
+using CrudCap.Services.Services;
 using CrudCap.Services.Services.Propertie;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,13 +40,15 @@ namespace CrudCap.WebApi.IoC
 
         public static void AddServices(this IServiceCollection services)
         {
-            services.AddScoped<IRealEstateService, RealEstateService>();
+            services.AddTransient<IRealEstateService, RealEstateService>();
             //services.AddScoped<IAddressService, AddressService>();
             //services.AddScoped<ICityService, CityService>();
             //services.AddScoped<ICountryService, CountryService>();
             //services.AddScoped<IStateService, StateService>();
-            services.AddScoped<IPropertiesService, PropertiesService>();
+            services.AddTransient<IPropertiesService, PropertiesService>();
             //services.AddScoped<IPropertyTypeService, PropertyTypeService>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IDomainValidationService, DomainValidationService>();
         }
 
 

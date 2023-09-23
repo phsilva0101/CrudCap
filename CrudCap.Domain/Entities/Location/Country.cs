@@ -9,14 +9,15 @@ namespace CrudCap.Domain.Entities.Location
 
         public virtual ICollection<Properties> Properties { get; set; }
         public virtual ICollection<RealEstate> RealEstate { get; set; }
-        public virtual ICollection<City> Cities { get; set; }
+        public virtual ICollection<State> States { get; set; }
+
 
 
         public Country()
         {
             Properties = new HashSet<Properties>();
             RealEstate = new HashSet<RealEstate>();
-            Cities = new HashSet<City>();
+            States = new HashSet<State>();
         }
 
     }

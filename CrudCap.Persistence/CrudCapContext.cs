@@ -14,12 +14,10 @@ namespace CrudCap.Persistence
         }
 
         public DbSet<RealEstate> RealEstates { get; set; }
-        public DbSet<Address> Addresses { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<Properties> Properties { get; set; }
-        public DbSet<PropertyType> PropertyTypes { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -17,6 +17,11 @@ namespace CrudCap.Persistence.EntitiesMap
                 .HasMaxLength(255);
 
             builder.Property(p => p.Initials).IsRequired().HasMaxLength(2);
+
+            builder.HasOne(p => p.Country)
+                .WithMany(p => p.States)
+                .HasForeignKey(p => p.CountryId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

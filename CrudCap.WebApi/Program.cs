@@ -23,14 +23,26 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDatabaseContext(appSettings);
 
+builder.Services.AddCors(o => o.AddPolicy("AnyOriginPolicy", builder =>
+{
+    builder.AllowAnyOrigin();
+    builder.AllowAnyMethod();
+    builder.AllowAnyHeader();
+}));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
+    });
 }
+
+app.UseCors("AnyOriginPolicy");
 
 app.UseHttpsRedirection();
 

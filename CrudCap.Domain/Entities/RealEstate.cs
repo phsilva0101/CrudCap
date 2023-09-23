@@ -22,6 +22,7 @@ namespace CrudCap.Domain.Entities
 
         public Guid CityId { get; set; }
         public virtual City City { get; set; }
+        #endregion
 
         public virtual ICollection<Properties> Properties { get; set; }
 
