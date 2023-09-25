@@ -2,19 +2,49 @@
 
 ## Overview
 
-Api Rest criada utilizando .NET 7, com a utilização do ORM Entity framework para a parte da persistência dos dados. 
-Essa API foi criada pensada em por em prática os conceitos e boas práticas do .net e de criação de API's, simulando um sistema de imobiliaria, de cadastro simples de residências, edição, inativação e consulta dos imoveis.
+Este projeto é uma API REST CRUD construída com .NET 7 C# usando Entity Framework e SQL Server como banco de dados. Esta API foi desenvolvida para gerenciar propriedades em um sistema imobiliário, permitindo criar, ler, atualizar e deletar propriedades.
 
-## Clone
+## Instalação e Configuração
 
-* Realizar a clonagem em sua maquina
+. Realizar a clonagem em sua maquina
 ```
 git clone git@github.com:phsilva0101/CrudCap.git
 ```
+. Mude para o Diretório do Projeto:
+  ```
+  cd crudCap
+  ```
+. Restaure as Dependências:
+    ```
+    dotnet restore
+    ```
 
-* Após ter o projeto clonado localmente, ir no appSettings e inserir sua string de conexão para SQL Server
-* Com a conexão de string devidamente inserida, será necessário rodar a criação das entidades em banco via migration, portando no Package Manager do Visual studio, rode o comando:
-  ```
-  Update-Database
-  ```
-  * Confirmando a criação das entidades em banco, o projeto está pronto para ser executado 
+. Configure o Banco de Dados SQL Server:
+  * ir no appSettings e inserir sua string de conexão para SQL Server
+  * Execute as migrações para criar a base de dados:
+  * ````
+    dotnet ef database update
+    ```
+  * ou via Package Manager Console do próprio Visual Studio:
+      ```
+      Update-Database
+      ```
+  . Execute o Projeto:
+    ```
+    dotnet run
+    ```
+
+## Documentação da API:
+
+A documentação detalhada dos endpoints da API está disponível no Swagger UI, que pode ser acessado ao executar o projeto e navegar para https://localhost:7094/swagger/index.html
+
+## Licença:
+Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
+
+## Contato
+ [Linkedin](https://www.linkedin.com/in/paulo-araujo-01/)
+
+    
+    
+
+
