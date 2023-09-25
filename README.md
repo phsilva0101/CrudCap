@@ -22,7 +22,7 @@ git clone git@github.com:phsilva0101/CrudCap.git
 . Configure o Banco de Dados SQL Server:
   * ir no appSettings e inserir sua string de conexão para SQL Server
   * Execute as migrações para criar a base de dados:
-  * ````
+  * ```
     dotnet ef database update
     ```
   * ou via Package Manager Console do próprio Visual Studio:
