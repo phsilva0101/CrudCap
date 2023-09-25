@@ -6,6 +6,7 @@ namespace CrudCap.Domain.ViewModels.Propertie
 {
     public class PropertiesResponseFullModel
     {
+        public Guid Id { get; set; }
         public string Description { get; set; }
         public decimal Value { get; set; }
         public PropertyType PropertyType { get; set; }

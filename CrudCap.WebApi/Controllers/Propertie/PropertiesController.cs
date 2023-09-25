@@ -43,8 +43,10 @@ namespace CrudCap.WebApi.Controllers.Propertie
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> InsertProperty([FromBody] PropertiesInsertModel model, CancellationToken cancellationToken)
         {
+
             var createdId = await _propertiesService.InsertProperty(model, cancellationToken);
-            return CreatedAtAction(nameof(GetByIdAsync), new { id = createdId }, model);
+            return NoContent();
+
         }
 
         [HttpPut]

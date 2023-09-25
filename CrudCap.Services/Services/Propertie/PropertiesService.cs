@@ -1,4 +1,5 @@
-﻿using CrudCap.Domain.Entities.Propertie;
+﻿using CrudCap.Domain.Entities.Location;
+using CrudCap.Domain.Entities.Propertie;
 using CrudCap.Domain.Interfaces.Base;
 using CrudCap.Domain.Interfaces.Propertie;
 using CrudCap.Domain.ViewModels.Base;
@@ -25,9 +26,7 @@ namespace CrudCap.Services.Services.Propertie
 
             (var entities, long count) = await _propertiesRepository.GetAllPropertiesAsync(request, cancellationToken);
 
-            var properties = entities.MapToModelList();
-
-            return new PaginationItemsResponse<PropertiesResponseFullModel>(request.PageSize, request.PageNumber, count, properties);
+            return new PaginationItemsResponse<PropertiesResponseFullModel>(request.PageSize, request.PageNumber, count, entities);
         }
 
         public async Task<PropertiesResponseFullModel> GetByIdAsync(Guid id, CancellationToken cancellationToken)
@@ -72,10 +71,24 @@ namespace CrudCap.Services.Services.Propertie
                 Suites = model.Suites,
                 Complement = model.Complement,
                 PropertyType = model.PropertyType,
-                CityId = model.CityId,
                 Neighborhood = model.Neighborhood,
                 Street = model.Street,
                 ZipCode = model.ZipCode,
+                City = new Domain.Entities.Location.City
+                {
+                    Name = model.City,
+                    State = new Domain.Entities.Location.State
+                    {
+                        Name = model.State,
+                        Initials = model.Initials,
+                        Country = new Country
+                        {
+                            Name = "Brasil",
+                            Initials = "BR"
+                        }
+                    },
+
+                }
 
             };
 

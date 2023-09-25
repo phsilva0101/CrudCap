@@ -16,7 +16,7 @@ namespace CrudCap.Domain.ViewModels.Propertie
         public int? GarageSpaces { get; set; }
         public int? Rooms { get; set; }
         public int? Suites { get; set; }
-        public decimal? ValueInitial { get; set; }
+        public decimal? ValueStart { get; set; }
         public decimal? ValueEnd { get; set; }
 
     }

@@ -20,7 +20,7 @@ namespace CrudCap.Domain.Entities.Propertie
         public bool IsParticular { get; set; }
 
         public Guid? RealEstateId { get; set; }
-        public virtual RealEstate RealEstate { get; set; }
+        public virtual RealEstate? RealEstate { get; set; }
 
         #region Address
         public string Street { get; set; }

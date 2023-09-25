@@ -18,7 +18,7 @@ namespace CrudCap.Persistence.EntitiesMap
 
             builder.Property(p => p.Value).IsRequired().HasPrecision(12, 2);
             builder.Property(p => p.Number).HasMaxLength(10).IsRequired();
-            builder.Property(p => p.Number).HasMaxLength(10).IsRequired();
+            builder.Property(p => p.RealEstateId).IsRequired(false);
 
 
             builder.HasOne(p => p.RealEstate)

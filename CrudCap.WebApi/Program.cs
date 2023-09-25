@@ -1,6 +1,7 @@
 using CrudCap.CrossCutting.SettingsApp;
 using CrudCap.WebApi.Filters;
 using CrudCap.WebApi.IoC;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,12 @@ builder.Services.AddControllers(filter =>
     filter.Filters.Add<GlobalExceptionsFilter>();
     filter.Filters.Add<ModelStateValidateFilter>();
     filter.Filters.Add<DomainValidationFilter>();
-});
+}).AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+
+}); ;
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

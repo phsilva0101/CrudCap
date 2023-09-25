@@ -20,7 +20,9 @@ namespace CrudCap.Domain.ViewModels.Propertie
         public string Complement { get; set; }
         public string ZipCode { get; set; }
 
-        public Guid CityId { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Initials { get; set; }
         public Guid? RealEstateId { get; set; }
     }
 }
